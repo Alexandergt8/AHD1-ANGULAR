@@ -1,0 +1,85 @@
+<section class="conteiner">
+    <h1>Gestión de Usuarios</h1>
+    <form [formGroup]="formularioContacto" (ngSubmit)="enviar()">
+        <div class="mb3">
+            <label class="form-label">Nombre:</label>
+            <input type="text" class="form-control --bs-info-border-subtle" formControlName="nombre">
+            @if (this.formularioContacto.get('nombre')?.errors?.['required']){
+                <span class="form-text">El nombre no puede que dar vacío</span>
+            }
+            @if(this.formularioContacto.get('nombre')?.errors?.['minlength']){
+                <span class="form-text">Debe tener como mínimo 10 caracteres</span>
+            }
+        </div>
+    
+        <div class="mb-3"> 
+            <label for="form-label">Edad:</label>
+            <input class="form-label --bs info-border-subtle" formControlName="edad">
+            @if(this.formularioContacto.get('edad')?.errors?.['required']){
+                <span class="form-text"> la edad es obligatorio colocarla</span>
+            }
+    
+            @if(this.formularioContacto.get('edad')?.errors?.['minlength']){
+                <span class="form-text">manimo 2 digitos</span>
+            }
+        </div>
+    
+        <div class="mb-3">
+            <label class="form-label">DPI:</label>
+            <input type="text" class="form-control --bs-info-border-subtle" formControlName="dpi">
+            @if(this.formularioContacto.get('dpi')?.errors?.['required']){
+                <span class="form-text">El DPI es obligatorio colocarlo:</span>
+            }
+    
+            @if(this.formularioContacto.get('dpi')?.errors?.['minlength']){
+                <span class="form-text">Debe tener como minimo 13 digitos</span>
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar</button>
+    </form>
+    <hr>
+<!-- almacenamiento de foemularios -->
+    <section class="container textcenter">
+        <h2>Lista de Personas</h2>
+        <ul class="list-group --bs-warning-border-subtle">
+            <li class="list-group-item">
+                <div class="row align-items-star --bs-info-rgb">
+                    <div class="col fs-4 fw-semibold">
+                        Nombre
+                    </div>
+                    <div class="col fs-4 fw-semibold">
+                        Edad
+                    </div>
+                    <div class="col fs-4 fw-semibold">
+                        DPI
+                    </div>
+                    <div class="col fs-4">
+                    </div>
+                </div>
+            </li>
+            @for (persona of listaPersonas; track $index) {
+                <li class="list-goup-item --bs-warning-boder-subtle">
+                    <div class="row align-item-start">
+                        <div class="col">
+                            {{persona.nombre}}
+                        </div>
+                        <div class="col">
+                            {{persona.edad}}
+                        </div>
+                        <div class="col">
+                            {{persona.dpi}}
+                        </div>
+                        <div class="col">
+                            <button (click)="borrarPersonal($index)" class="btn btn-danger">Eliminar</button>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </section>
+    </section>
+    
+
+
+
+
